@@ -83,7 +83,10 @@ public class Payment {
 	private String instructions;
 	@SerializedName("AuthenticationUrl")
 	private String authenticationUrl;
-	
+	@SerializedName("VoidedAmount")
+	private Integer voidedAmount;
+	@SerializedName("VoidedDate")
+	private String voidedDate;
 
 	public Payment(Integer amount, Integer installments) {
 		setAmount(amount);
@@ -100,14 +103,14 @@ public class Payment {
 
 		return getCreditCard();
 	}
-	
+
 	public DebitCard debitCard(String securityCode, String brand) {
 		setType(Type.DebitCard);
 		setDebitCard(new DebitCard(securityCode, brand));
 
 		return getDebitCard();
 	}
-	
+
 
 	public RecurrentPayment recurrentPayment(boolean authorizeNow) {
 		setRecurrentPayment(new RecurrentPayment(authorizeNow));
@@ -185,11 +188,11 @@ public class Payment {
 		this.debitCard = debitCard;
 		return this;
 	}
-	
+
 	public DebitCard getDebitCard() {
 		return debitCard;
 	}
-	
+
 	public Currency getCurrency() {
 		return currency;
 	}
@@ -427,6 +430,14 @@ public class Payment {
 
 	public String getUrl() {
 		return url;
+	}
+
+	public Integer getVoidedAmount() {
+		return voidedAmount;
+	}
+
+	public String getVoidedDate() {
+		return voidedDate;
 	}
 
 	public enum Provider {
