@@ -458,7 +458,8 @@ public class Payment {
         return externalAuthentication;
     }
 
-    public void setExternalAuthentication(ExternalAuthentication externalAuthentication) {
+    public Payment setExternalAuthentication(ExternalAuthentication externalAuthentication) {
         this.externalAuthentication = externalAuthentication;
+		return this;
     }
 }

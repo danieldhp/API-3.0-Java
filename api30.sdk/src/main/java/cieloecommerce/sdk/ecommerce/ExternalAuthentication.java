@@ -13,6 +13,12 @@ public class ExternalAuthentication {
     @SerializedName("Eci")
     private String eci;
 
+    @SerializedName("Version")
+    private String version;
+
+    @SerializedName("ReferenceID")
+    private String referenceId;
+
     public ExternalAuthentication(String cavv,
                                   String xid,
                                   String eci) {
@@ -45,6 +51,24 @@ public class ExternalAuthentication {
 
     public ExternalAuthentication setEci(String eci) {
         this.eci = eci;
+        return this;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public ExternalAuthentication setVersion(String version) {
+        this.version = version;
+        return this;
+    }
+
+    public String getReferenceId() {
+        return referenceId;
+    }
+
+    public ExternalAuthentication setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
         return this;
     }
 }
