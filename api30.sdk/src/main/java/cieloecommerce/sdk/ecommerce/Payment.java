@@ -87,6 +87,8 @@ public class Payment {
 	private Integer voidedAmount;
 	@SerializedName("VoidedDate")
 	private String voidedDate;
+	@SerializedName("ExternalAuthentication")
+	private ExternalAuthentication externalAuthentication;
 
 	public Payment(Integer amount, Integer installments) {
 		setAmount(amount);
@@ -451,4 +453,12 @@ public class Payment {
 	public enum Currency {
 		BRL, USD, MXN, COP, CLP, ARS, PEN, EUR, PYN, UYU, VEB, VEF, GBP
 	}
+
+    public ExternalAuthentication getExternalAuthentication() {
+        return externalAuthentication;
+    }
+
+    public void setExternalAuthentication(ExternalAuthentication externalAuthentication) {
+        this.externalAuthentication = externalAuthentication;
+    }
 }
