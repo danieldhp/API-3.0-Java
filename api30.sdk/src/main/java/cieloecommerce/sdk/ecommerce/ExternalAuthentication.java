@@ -21,10 +21,17 @@ public class ExternalAuthentication {
 
     public ExternalAuthentication(String cavv,
                                   String xid,
-                                  String eci) {
+                                  String eci,
+                                  String version,
+                                  String referenceId) {
         this.cavv = cavv;
         this.xid = xid;
         this.eci = eci;
+        this.version = version;
+        this.referenceId = referenceId;
+    }
+
+    public ExternalAuthentication() {
     }
 
     public String getCavv() {
