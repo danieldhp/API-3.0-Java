@@ -87,6 +87,8 @@ public class Payment {
 	private Integer voidedAmount;
 	@SerializedName("VoidedDate")
 	private String voidedDate;
+	@SerializedName("QrCodeBase64Image")
+	private String qrCodeBase64Image;
 	@SerializedName("ExternalAuthentication")
 	private ExternalAuthentication externalAuthentication;
 
@@ -442,12 +444,20 @@ public class Payment {
 		return voidedDate;
 	}
 
+	public String getQrCodeBase64Image() {
+		return qrCodeBase64Image;
+	}
+
+	public void setQrCodeBase64Image(String qrCodeBase64Image) {
+		this.qrCodeBase64Image = qrCodeBase64Image;
+	}
+
 	public enum Provider {
 		Bradesco, BancoDoBrasil, Simulado
 	}
 
 	public enum Type {
-		CreditCard, DebitCard, ElectronicTransfer, Boleto
+		CreditCard, DebitCard, ElectronicTransfer, Boleto, QRCode
 	}
 
 	public enum Currency {
