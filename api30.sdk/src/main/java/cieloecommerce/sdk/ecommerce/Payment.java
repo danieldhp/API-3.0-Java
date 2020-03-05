@@ -29,6 +29,8 @@ public class Payment {
 	private String authorizationCode;
 	@SerializedName("SoftDescriptor")
 	private String softDescriptor = "";
+	@SerializedName("PaymentFacilitator")
+	private PaymentFacilitator paymentFacilitator;
 	@SerializedName("ReturnUrl")
 	private String returnUrl;
 	@SerializedName("Provider")
@@ -320,6 +322,13 @@ public class Payment {
 
 	public Payment setSoftDescriptor(String softDescriptor) {
 		this.softDescriptor = softDescriptor;
+		return this;
+	}
+
+	public PaymentFacilitator getPaymentFacilitator() { return paymentFacilitator; }
+
+	public Payment setPaymentFacilitator(PaymentFacilitator paymentFacilitator) {
+		this.paymentFacilitator = paymentFacilitator;
 		return this;
 	}
 
