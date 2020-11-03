@@ -6,6 +6,8 @@ public class SubEstablishment {
 
   @SerializedName("EstablishmentCode")
   private String establishmentCode;
+  @SerializedName("Identity")
+  private String identity;
   @SerializedName("Mcc")
   private String mcc;
   @SerializedName("Address")
@@ -16,8 +18,12 @@ public class SubEstablishment {
   private String state;
   @SerializedName("PostalCode")
   private String postalCode;
+  @SerializedName("CountryCode")
+  private String countryCode;
   @SerializedName("PhoneNumber")
   private String phoneNumber;
+  @SerializedName("SoftDescriptor")
+  private String softDescriptor;
 
   public String getEstablishmentCode() {
     return this.establishmentCode;
@@ -25,6 +31,15 @@ public class SubEstablishment {
 
   public SubEstablishment setEstablishmentCode(String establishmentCode) {
     this.establishmentCode = establishmentCode;
+    return this;
+  }
+
+  public String getIdentity() {
+    return this.identity;
+  }
+
+  public SubEstablishment setIdentity(String identity) {
+    this.identity = identity;
     return this;
   }
 
@@ -73,12 +88,30 @@ public class SubEstablishment {
     return this;
   }
 
+  public String getCountryCode() {
+    return this.countryCode;
+  }
+
+  public SubEstablishment setCountryCode(String countryCode) {
+    this.countryCode = countryCode;
+    return this;
+  }
+
   public String getPhoneNumber() {
     return this.phoneNumber;
   }
 
   public SubEstablishment setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  public String getSoftDescriptor() {
+    return this.softDescriptor;
+  }
+
+  public SubEstablishment setSoftDescriptor(String softDescriptor) {
+    this.softDescriptor = softDescriptor;
     return this;
   }
 }
