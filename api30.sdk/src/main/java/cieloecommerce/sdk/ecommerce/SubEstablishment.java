@@ -22,8 +22,6 @@ public class SubEstablishment {
   private String countryCode;
   @SerializedName("PhoneNumber")
   private String phoneNumber;
-  @SerializedName("SoftDescriptor")
-  private String softDescriptor;
 
   public String getEstablishmentCode() {
     return this.establishmentCode;
@@ -99,19 +97,5 @@ public class SubEstablishment {
 
   public String getPhoneNumber() {
     return this.phoneNumber;
-  }
-
-  public SubEstablishment setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-    return this;
-  }
-
-  public String getSoftDescriptor() {
-    return this.softDescriptor;
-  }
-
-  public SubEstablishment setSoftDescriptor(String softDescriptor) {
-    this.softDescriptor = softDescriptor;
-    return this;
   }
 }
