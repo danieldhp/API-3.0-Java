@@ -98,4 +98,9 @@ public class SubEstablishment {
   public String getPhoneNumber() {
     return this.phoneNumber;
   }
+
+  public SubEstablishment setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
 }
