@@ -2,7 +2,7 @@ package cieloecommerce.sdk.ecommerce.request;
 
 import java.io.IOException;
 
-import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 
@@ -24,7 +24,7 @@ public class CreateCartTokenRequest extends AbstractSaleRequest<CardToken, CardT
 
 		request.setEntity(new StringEntity(new GsonBuilder().create().toJson(param)));
 
-		HttpResponse response = sendRequest(request);
+		CloseableHttpResponse response = sendRequest(request);
 
 		return readResponse(response, CardToken.class);
 	}

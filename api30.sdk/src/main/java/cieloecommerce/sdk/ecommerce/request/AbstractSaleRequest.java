@@ -1,22 +1,18 @@
 package cieloecommerce.sdk.ecommerce.request;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.UUID;
-import java.util.zip.GZIPInputStream;
 
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.google.gson.Gson;
 import cieloecommerce.sdk.Environment;
 import cieloecommerce.sdk.Merchant;
+import org.apache.http.util.EntityUtils;
 
 /**
  * Abstraction to reuse most of the code that send and receive the HTTP
@@ -25,7 +21,7 @@ import cieloecommerce.sdk.Merchant;
 public abstract class AbstractSaleRequest<Request, Response> {
 	final Environment environment;
 	private final Merchant merchant;
-	private HttpClient httpClient;
+	private CloseableHttpClient httpClient;
 
 	AbstractSaleRequest(Merchant merchant, Environment environment) {
 		this.merchant = merchant;
@@ -34,7 +30,7 @@ public abstract class AbstractSaleRequest<Request, Response> {
 
 	public abstract Response execute(Request param) throws IOException, CieloRequestException;
 
-	public void setHttpClient(HttpClient httpClient) {
+	public void setHttpClient(CloseableHttpClient httpClient) {
 		this.httpClient = httpClient;
 	}
 
@@ -48,7 +44,7 @@ public abstract class AbstractSaleRequest<Request, Response> {
 	 * @throws IOException
 	 *             yeah, deal with it
 	 */
-	HttpResponse sendRequest(HttpUriRequest request) throws IOException {
+	CloseableHttpResponse sendRequest(HttpUriRequest request) throws IOException {
 		if (httpClient == null) {
 			httpClient = HttpClientBuilder.create().build();
 		}
@@ -67,33 +63,22 @@ public abstract class AbstractSaleRequest<Request, Response> {
 	/**
 	 * Read the response body sent by Cielo
 	 *
-	 * @param response
-	 *            HttpResponse by Cielo, with headers, status code, etc.
+	 * @param response HttpResponse by Cielo, with headers, status code, etc.
 	 * @return An instance of Sale with the response entity sent by Cielo.
-	 * @throws IOException
-	 *             yeah, deal with it
+	 * @throws IOException           yeah, deal with it
 	 * @throws CieloRequestException
 	 */
-	Response readResponse(HttpResponse response, Class<Response> responseClassOf)
-			throws IOException, CieloRequestException {
-		HttpEntity responseEntity = response.getEntity();
-		InputStream responseEntityContent = responseEntity.getContent();
-
-		Header contentEncoding = response.getFirstHeader("Content-Encoding");
-
-		if (contentEncoding != null && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
-			responseEntityContent = new GZIPInputStream(responseEntityContent);
+	Response readResponse(CloseableHttpResponse response, Class<Response> responseClassOf)
+		throws IOException, CieloRequestException {
+		try {
+			HttpEntity responseEntity = response.getEntity();
+			final String responseBody = EntityUtils.toString(responseEntity);
+			EntityUtils.consume(responseEntity);
+			return parseResponse(response.getStatusLine().getStatusCode(), responseBody,
+				responseClassOf);
+		} finally {
+			response.close();
 		}
-
-		BufferedReader responseReader = new BufferedReader(new InputStreamReader(responseEntityContent));
-		StringBuilder responseBuilder = new StringBuilder();
-		String line;
-
-		while ((line = responseReader.readLine()) != null) {
-			responseBuilder.append(line);
-		}
-
-		return parseResponse(response.getStatusLine().getStatusCode(), responseBuilder.toString(), responseClassOf);
 	}
 
 	/**

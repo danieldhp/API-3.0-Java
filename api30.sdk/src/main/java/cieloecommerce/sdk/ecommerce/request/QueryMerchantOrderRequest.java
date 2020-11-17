@@ -2,7 +2,7 @@ package cieloecommerce.sdk.ecommerce.request;
 
 import java.io.IOException;
 
-import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
 import cieloecommerce.sdk.Environment;
@@ -22,9 +22,9 @@ public class QueryMerchantOrderRequest extends AbstractSaleRequest<String, Query
 		String url = environment.getApiQueryURL() + "1/sales?merchantOrderId=" + merchnatOrderId;
 
 		HttpGet request = new HttpGet(url);
-		HttpResponse response = sendRequest(request);
+		CloseableHttpResponse response = sendRequest(request);
 
 		return readResponse(response, QueryMerchantOrderResponse.class);
 	}
-	
+
 }
