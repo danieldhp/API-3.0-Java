@@ -3,7 +3,7 @@ package cieloecommerce.sdk.ecommerce.request;
 import cieloecommerce.sdk.Environment;
 import cieloecommerce.sdk.Merchant;
 import cieloecommerce.sdk.ecommerce.SaleResponse;
-import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URIBuilder;
 
@@ -43,7 +43,7 @@ public class UpdateSaleRequest extends AbstractSaleRequest<String, SaleResponse>
 
 			request = new HttpPut(builder.build().toString());
 
-			HttpResponse response = sendRequest(request);
+			CloseableHttpResponse response = sendRequest(request);
 
 			sale = readResponse(response, SaleResponse.class);
 		} catch (URISyntaxException e) {

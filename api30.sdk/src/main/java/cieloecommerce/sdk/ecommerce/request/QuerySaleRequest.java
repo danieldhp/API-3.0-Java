@@ -2,7 +2,7 @@ package cieloecommerce.sdk.ecommerce.request;
 
 import java.io.IOException;
 
-import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
 import cieloecommerce.sdk.Environment;
@@ -22,7 +22,7 @@ public class QuerySaleRequest extends AbstractSaleRequest<String, Sale> {
 		String url = environment.getApiQueryURL() + "1/sales/" + paymentId;
 
 		HttpGet request = new HttpGet(url);
-		HttpResponse response = sendRequest(request);
+		CloseableHttpResponse response = sendRequest(request);
 
 		return readResponse(response, Sale.class);
 	}

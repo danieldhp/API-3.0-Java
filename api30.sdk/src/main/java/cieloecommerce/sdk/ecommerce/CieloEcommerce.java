@@ -2,7 +2,7 @@
 
 import cieloecommerce.sdk.Merchant;
 import cieloecommerce.sdk.ecommerce.request.*;
-import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import java.io.IOException;
 public class CieloEcommerce {
 	private final Merchant merchant;
 	private final Environment environment;
-	private HttpClient httpClient;
+	private CloseableHttpClient httpClient;
 
 	/**
 	 * Create an instance of CieloEcommerce choosing the environment where the
@@ -39,7 +39,7 @@ public class CieloEcommerce {
 		this(merchant, Environment.PRODUCTION);
 	}
 
-	public void setHttpClient(HttpClient httpClient) {
+	public void setHttpClient(CloseableHttpClient httpClient) {
 		this.httpClient = httpClient;
 	}
 
@@ -69,7 +69,7 @@ public class CieloEcommerce {
 
 	/**
 	 * Create a card token to be stored on store
-	 * 
+	 *
 	 * @param cardToken
 	 *            The credit card data
 	 * @return The card token
@@ -112,7 +112,7 @@ public class CieloEcommerce {
 
 		return sale;
 	}
-	
+
 	/**
 	 * Query a Sale on Cielo by paymentId
 	 *
@@ -136,7 +136,7 @@ public class CieloEcommerce {
 		return merchantOrder;
 	}
 
-	
+
 
 	/**
 	 * Query a RecurrentSale on Cielo by recurrentPaymentId

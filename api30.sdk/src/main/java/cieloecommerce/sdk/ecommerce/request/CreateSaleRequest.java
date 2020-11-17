@@ -3,7 +3,7 @@ package cieloecommerce.sdk.ecommerce.request;
 import java.io.IOException;
 
 import org.apache.commons.codec.Charsets;
-import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -29,7 +29,7 @@ public class CreateSaleRequest extends AbstractSaleRequest<Sale, Sale> {
 
 		request.setEntity(new StringEntity(new GsonBuilder().create().toJson(param),
 				ContentType.create(ContentType.APPLICATION_JSON.getMimeType(), Charsets.UTF_8.name())));
-		HttpResponse response = sendRequest(request);
+		CloseableHttpResponse response = sendRequest(request);
 
 		return readResponse(response, Sale.class);
 	}
